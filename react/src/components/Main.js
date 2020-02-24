@@ -19,7 +19,12 @@ export default function Main () {
                     const result = await getPrivateContent();
                     setContent(result.body)
                 } catch (err) {
-                    setContent(errorMsg);
+                    if (typeof err === "string") {
+                        setContent(err);
+                    }
+                    else {
+                        setContent(errorMsg);
+                    }
                 }
                 setLoadingState(false)
             })();
