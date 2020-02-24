@@ -7,13 +7,13 @@ export default function Main () {
 
     const user = useContext(UserContext);
     const [content, setContent] = useState("");
-    const [loadingState, setLoadingState] = useState(true);
+    const [loadingState, setLoadingState] = useState(false);
 
     var errorMsg = "Oops! Something went wrong";
     
     useEffect(() => { 
-
         if (user) {
+            setLoadingState(true);
             ;(async () => {
                 try {
                     const result = await getPrivateContent();
