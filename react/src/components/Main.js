@@ -1,21 +1,27 @@
 import React, {useContext, useEffect, useState} from 'react';
 import getPrivateContent from "../helpers/ajax.js"
 import {UserContext} from "../App.js"
+import Loader from "./Loader.js"
 
 export default function Main () {
 
     const user = useContext(UserContext);
     const [content, setContent] = useState("");
+    const [loadingState, setLoadingState] = useState(true);
+
+    var errorMsg = "Oops! Something went wrong";
     
     useEffect(() => { 
+
         if (user) {
             ;(async () => {
                 try {
                     const result = await getPrivateContent();
                     setContent(result.body)
                 } catch (err) {
-                    setContent(err)
+                    setContent(errorMsg);
                 }
+                setLoadingState(false)
             })();
         } else {
             setContent("Please login to see main content");
@@ -23,6 +29,9 @@ export default function Main () {
     }, [user])
 
     return (
-        <h2>{content}</h2>
+        <>
+            {loadingState ? <Loader/> : ""} 
+            <h2>{content}</h2>
+        </>
     )
 }
