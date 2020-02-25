@@ -17,7 +17,7 @@ export default function Main () {
             ;(async () => {
                 try {
                     const result = await getPrivateContent();
-                    setContent(result.body)
+                    setContent(result.body);
                 } catch (err) {
                     if (typeof err === "string") {
                         setContent(err);
