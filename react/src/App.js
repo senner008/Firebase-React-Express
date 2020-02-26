@@ -20,6 +20,7 @@ function App () {
       firebaseInst.init();
       firebaseInst.getAuth().onAuthStateChanged(function(user) {
         if (user) {
+          console.log(user)
           setUserState(user)
         } else {
           setUserState(null)

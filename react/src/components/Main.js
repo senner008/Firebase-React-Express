@@ -9,22 +9,19 @@ export default function Main () {
     const [content, setContent] = useState("");
     const [loadingState, setLoadingState] = useState(false);
 
-    var errorMsg = "Oops! Something went wrong";
+    const errorMsg = "Oops! Something went wrong";
     
     useEffect(() => { 
         if (user) {
-            setLoadingState(true);
             ;(async () => {
+                setLoadingState(true);
                 try {
                     const result = await getPrivateContent();
                     setContent(result.body);
                 } catch (err) {
-                    if (typeof err === "string") {
-                        setContent(err);
-                    }
-                    else {
-                        setContent(errorMsg);
-                    }
+                    typeof err === "string"
+                     ? setContent(err)
+                     : setContent(errorMsg);
                 }
                 setLoadingState(false)
             })();
@@ -35,8 +32,11 @@ export default function Main () {
 
     return (
         <>
-            {loadingState ? <Loader/> : ""} 
-            <h2>{content}</h2>
+        {
+            loadingState 
+                ? <Loader/>
+                : <h2>{content}</h2>
+        }
         </>
     )
 }
