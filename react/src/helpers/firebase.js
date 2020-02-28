@@ -15,11 +15,7 @@ function Firebase () {
             return firebase.auth();
         },
         async signInEmailAndPassword(email, pass) {
-            try {
-                await firebase.auth().signInWithEmailAndPassword(email, pass);
-            } catch (err) {
-                console.log(err)
-            }
+            return await firebase.auth().signInWithEmailAndPassword(email, pass);
         },
         async signInGoogle() {
             try {
