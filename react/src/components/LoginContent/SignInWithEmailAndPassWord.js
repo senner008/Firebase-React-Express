@@ -9,9 +9,9 @@ export default function SignInWithEmailAndPassWord ({firebase, setError}) {
     }
 
     return (
-      <div>
+      <>
         <SignInForm signIn={signIn}/>
-      </div>
+      </>
     );
 }
 
