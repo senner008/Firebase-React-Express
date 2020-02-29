@@ -8,7 +8,7 @@ import {UserContext} from "../App.js"
 export default function PrivateRoute({ children, ...rest }) {
 
     const user = useContext(UserContext);
-
+    // from react-router documentation
     return (
       <Route
         {...rest}

@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 import { useEffect } from 'react';
 
-export default function Login (props) {
+export default function Login () {
 
     const history = useHistory();
     const location = useLocation();
