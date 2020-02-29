@@ -13,19 +13,18 @@ import { useEffect } from 'react';
 
 export default function Login (props) {
 
-    let history = useHistory();
-    let location = useLocation();
-  
-    let { from } = location.state || { from: { pathname: "/" } };
+    const history = useHistory();
+    const location = useLocation();
+    const { from } = location.state || { from: { pathname: "/" } };
 
     const user = useContext(UserContext);
     const [error, setError] = useState("");
+    
     useEffect(() => {
         if (user) {
-            if (error) setError("");
             history.replace(from);
         }
-    }, [user]);
+    }, [user, history, from]);
 
     return (
         <>
@@ -34,19 +33,15 @@ export default function Login (props) {
             {
                 user
                     ? <p>Hello, {user.displayName}</p>
-                    : <p>You must log in to view the page at {from.pathname}</p>
-            }
-            {
-                !user
-                    ? (
+                    : 
+                    (
                         <>
+                            <p>You must log in to view the page at {from.pathname}</p>
                             <SignInWithEmailAndPassword firebase={firebaseInst} setError={setError}/>
                             <GoogleOAuth firebase={firebaseInst}/>
                         </>
                     )
-                    : ""
             }
-          
         </>
     )
 }

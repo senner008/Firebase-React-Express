@@ -9,8 +9,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect
+  Link
 } from "react-router-dom";
 
 const UserContext = createContext(null);
@@ -23,7 +22,7 @@ function App () {
       firebaseInst.init();
       firebaseInst.getAuth().onAuthStateChanged(function(user) {
         if (user) {
-          setUserState(user)
+          setUserState(user);
         } else {
           setUserState(null)
         }

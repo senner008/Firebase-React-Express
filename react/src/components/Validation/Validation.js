@@ -9,7 +9,7 @@ export default function Validation ({setState, children}) {
 
     useEffect(() => {
         setState(childrenState.every(bool => bool));
-    }, [childrenState]);
+    });
 
     return (
         <>

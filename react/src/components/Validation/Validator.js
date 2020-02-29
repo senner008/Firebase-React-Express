@@ -1,24 +1,26 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext} from 'react';
 import {ValidationContext} from "./Validation.js";
 import "../../css/validation.css"
 
-export default function Validator ({description, validator, value, children}) {
+function Validator ({description, validator, value, children}) {
 
-    const validationContext = useContext(ValidationContext);
+    const {childrenState, setChildrenState, index} = useContext(ValidationContext);
 
-    useEffect(() => {
-        validationContext.setChildrenState(prev => {
-            const prevClone = [...prev]
-            prevClone[validationContext.index] = validator(value);
+    const validatedValue = validator(value);
+
+    if (childrenState[index] !== validatedValue) {
+        setChildrenState(prev => {
+            const prevClone = [...prev];
+            prevClone[index] = validator(value);
             return prevClone;
         })
-    }, [value]);
+    }
 
     return (
         <>
             <div className="validate-error">
                 {
-                    validator(value) || !value
+                    validatedValue || !value
                         ? ""
                         : description
                 }
@@ -29,3 +31,5 @@ export default function Validator ({description, validator, value, children}) {
         </>
     )
 }
+
+export default Validator

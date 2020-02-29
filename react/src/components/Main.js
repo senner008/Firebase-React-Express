@@ -8,13 +8,11 @@ export default function Main () {
 
     const user = useContext(UserContext);
     const [content, setContent] = useState("");
-    const [loadingState, setLoadingState] = useState(false);
-
-  
+    const [loadingState, setLoadingState] = useState(false);  
     
     useEffect(() => { 
         if (user) {
-            const result = ajaxContent(ajaxUrls.main, setLoadingState)
+            ajaxContent(ajaxUrls.main, setLoadingState)
                 .then(setContent);
         } 
     }, [user])

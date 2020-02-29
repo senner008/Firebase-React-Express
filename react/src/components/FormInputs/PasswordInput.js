@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PasswordInput({ value, setValue }) {
+function PasswordInput({ value, setValue }) {
 
    return (
     <div>
@@ -13,3 +13,10 @@ export default function PasswordInput({ value, setValue }) {
     </div>
   );
 }
+
+
+function areEqual (prev, next) {
+  return prev.value === next.value
+}
+
+export default React.memo(PasswordInput, areEqual)

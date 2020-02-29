@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function EmailInput({ value, setValue }) {
+function EmailInput({ value, setValue }) {
 
    return (
     <div>
@@ -13,3 +13,9 @@ export default function EmailInput({ value, setValue }) {
     </div>
   );
 }
+
+function areEqual (prev, next) {
+  return prev.value === next.value
+}
+
+export default React.memo(EmailInput, areEqual)
