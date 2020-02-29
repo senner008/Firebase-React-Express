@@ -5,7 +5,8 @@ const ValidationContext = createContext();
 
 export default function Validation ({setState, children}) {
 
-    const [childrenState, setChildrenState] = useState([]);
+    const childrenToArray = React.Children.toArray(children);
+    const [childrenState, setChildrenState] = useState(childrenToArray.map(val => false));
 
     useEffect(() => {
         // check that all bools in childrenState array are true
@@ -15,7 +16,7 @@ export default function Validation ({setState, children}) {
     return (
         <>
             {
-                React.Children.toArray(children).map((child, index) => {
+                childrenToArray.map((child, index) => {
                     return (
                         <div key={index}>
                             {/* Each <Validator/> child will be provided with a unique index */}
