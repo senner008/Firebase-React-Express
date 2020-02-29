@@ -12,7 +12,7 @@ function Validator ({description, validator, value, children}) {
         // update the childrenState array with a boolean at the provided index
         setChildrenState(prev => {
             const prevClone = [...prev];
-            prevClone[index] = validator(value);
+            prevClone[index] = validatedValue;
             return prevClone;
         })
     }
