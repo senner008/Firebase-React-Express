@@ -15,7 +15,7 @@ export default function Validation ({setState, children}) {
     return (
         <>
             {
-                children.map((child, index) => {
+                React.Children.toArray(children).map((child, index) => {
                     return (
                         <div key={index}>
                             {/* Each <Validator/> child will be provided with a unique index */}
