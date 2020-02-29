@@ -22,7 +22,12 @@ function Header (props) {
             <h2>Header</h2>
             {
                 user
-                ? <button onClick={signOut}>Sign out</button>
+                ? (
+                    <>
+                        <p>Hello, {user.displayName}</p>
+                        <button onClick={signOut}>Sign out</button>
+                    </>
+                )
                 : <p>You are not logged in.</p>
             }
             {props.children}

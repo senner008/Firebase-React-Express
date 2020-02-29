@@ -8,6 +8,7 @@ export default function Validation ({setState, children}) {
     const [childrenState, setChildrenState] = useState([]);
 
     useEffect(() => {
+        // check that all bools in childrenState array are true
         setState(childrenState.every(bool => bool));
     });
 
@@ -17,6 +18,7 @@ export default function Validation ({setState, children}) {
                 children.map((child, index) => {
                     return (
                         <div key={index}>
+                            {/* Each <Validator/> child will be provided with a unique index */}
                             <ValidationContext.Provider value={{index, childrenState, setChildrenState}}>
                                 {child}
                             </ValidationContext.Provider>

@@ -24,24 +24,15 @@ export default function Login (props) {
         if (user) {
             history.replace(from);
         }
-    }, [user, history, from]);
+    });
 
     return (
         <>
             <h2>Login</h2>
             <h3>{error}</h3>
-            {
-                user
-                    ? <p>Hello, {user.displayName}</p>
-                    : 
-                    (
-                        <>
-                            <p>You must log in to view the page at {from.pathname}</p>
-                            <SignInWithEmailAndPassword firebase={firebaseInst} setError={setError}/>
-                            <GoogleOAuth firebase={firebaseInst}/>
-                        </>
-                    )
-            }
+            <p>You must log in to view the page at {from.pathname}</p>
+            <SignInWithEmailAndPassword firebase={firebaseInst} setError={setError}/>
+            <GoogleOAuth firebase={firebaseInst}/>
         </>
     )
 }

@@ -9,6 +9,7 @@ function Validator ({description, validator, value, children}) {
     const validatedValue = validator(value);
 
     if (childrenState[index] !== validatedValue) {
+        // update the childrenState array with a boolean at the provided index
         setChildrenState(prev => {
             const prevClone = [...prev];
             prevClone[index] = validator(value);
@@ -26,6 +27,7 @@ function Validator ({description, validator, value, children}) {
                 }
             </div>
             {
+                // pass on the value to the child component
                 React.cloneElement(children, { value: value })
             }
         </>
