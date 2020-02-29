@@ -18,7 +18,7 @@ var firebaseConfig = {
 module.exports = firebaseConfig;
 ```
 
-#### add firebase config to admin/config/private-admin-key.json
+#### add firebase private key to admin/config/private-admin-key.json
 ```js
 {
   "type": "",
