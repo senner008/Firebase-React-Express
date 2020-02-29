@@ -3,6 +3,7 @@ import Header from "./components/Header.js"
 import Main from "./components/Main.js"
 import About from "./components/About.js"
 import Login from "./components/Login.js"
+import PrivateRoute from "./components/PrivateRoute.js"
 import firebaseInst from "./helpers/firebase.js";
 import {
   BrowserRouter as Router,
@@ -41,20 +42,13 @@ function App () {
               <li>
                 <Link to="/about">About</Link>
               </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
             </ul>
           </nav>
         </Header>
         <Switch>
-          <Route path="/main">
-            {
-              userState
-                ? <Main />
-                : <Redirect to={{ pathname: "/login"}}/>
-            }
-          </Route>
+          <PrivateRoute path="/main">
+            <Main />
+          </PrivateRoute>
           <Route path="/about">
             <About />
           </Route>
