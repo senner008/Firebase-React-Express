@@ -5,9 +5,15 @@ jobs:
     name: Docker
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Build a Docker image
-      run: docker build -t react-app .
+    - uses: actions/checkout@v1
+    - name: Login to Heroku Container registry
+        env: 
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login 
+        
+    # - uses: actions/checkout@master
+    # - name: Build a Docker image
+    #   run: docker build -t react-app .
    
     # - name: Checkout
     #   uses: actions/checkout@master
