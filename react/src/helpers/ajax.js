@@ -52,7 +52,7 @@ export default async function ajaxContent (url, setLoader = () => "") {
 }
 
 const ajaxUrls = {
-    main : "http://localhost:5000/auth"
+    main : "auth"
 }
 
 export {ajaxUrls}
