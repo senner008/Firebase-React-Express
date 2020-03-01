@@ -5,8 +5,9 @@ jobs:
     name: Docker
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@master
     - name: Build a Docker image
-    run: docker build -t react-app .
+      run: docker build -t react-app .
    
     # - name: Checkout
     #   uses: actions/checkout@master
