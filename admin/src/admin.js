@@ -16,7 +16,6 @@ if (process.env.NODE_ENV === "production") {
 }
 else {
     serviceAccount = require("../config/private-admin-key.json");
-    // console.log(serviceAccount)
 }
 
 const admin = require("firebase-admin");
