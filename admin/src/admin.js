@@ -22,12 +22,9 @@ else {
 const admin = require("firebase-admin");
 
 admin.initializeApp({
-    credential: admin.credential.cert({
-        "private_key": serviceAccount.private_key_id,
-        "client_email": serviceAccount.client_email,
-      }),
+    credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://node-express-auth.firebaseio.com"
 });
-console.log(process.env.NODE_ENV)
+// console.log(process.env.NODE_ENV)
 module.exports = admin;
   
