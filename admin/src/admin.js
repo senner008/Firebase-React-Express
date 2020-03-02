@@ -16,12 +16,16 @@ if (process.env.NODE_ENV === "production") {
 }
 else {
     serviceAccount = require("../config/private-admin-key.json");
+    // console.log(serviceAccount)
 }
 
 const admin = require("firebase-admin");
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert({
+        "private_key": serviceAccount.private_key_id,
+        "client_email": serviceAccount.client_email,
+      }),
     databaseURL: "https://node-express-auth.firebaseio.com"
 });
 console.log(process.env.NODE_ENV)
