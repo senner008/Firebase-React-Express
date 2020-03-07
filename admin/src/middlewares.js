@@ -1,6 +1,7 @@
 const admin = require("./admin.js")
 
-const makeAdmin = async uid => await admin.auth().setCustomUserClaims(uid, {admin: true});
+const makeAdmin = async uid => 
+  await admin.auth().setCustomUserClaims(uid, {admin: true});
 
 const getAuthToken = (req, res, next) => {
     if (
@@ -18,7 +19,6 @@ const checkIfAdmin = (req, res, next) => {
     getAuthToken(req, res, async () => {
        try {
          const { authToken } = req;
-    
          const userInfo = await admin
            .auth()
            .verifyIdToken(authToken);
