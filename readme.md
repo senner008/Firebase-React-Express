@@ -45,7 +45,7 @@ CLIENT_EMAIL=secret
 
 2. Heroku login
 3. heroku authorizations:create
-4. Heroku create <my-new-app-name>
+4. Heroku create {my-new-app-name}
 5. Go to github settings and create 2 secrets
   - HEROKU_API_KEY with Token from heroku authorizations
   - HEROKU_APP_NAME with the name of your app
