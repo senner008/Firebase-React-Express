@@ -43,13 +43,13 @@ PRIVATE_KEY=secret
 CLIENT_EMAIL=secret
 ```
 
-2. Heroku login
+2. heroku login
 3. heroku authorizations:create
-4. Heroku create {my-new-app-name}
+4. heroku create {my-new-app-name}
 5. Go to github settings and create 2 secrets
   - HEROKU_API_KEY with Token from heroku authorizations
   - HEROKU_APP_NAME with the name of your app
 6. Go to your heroku app and add the envs
-7. Go to the Firebase console and AUthentication -> Sign-in method and add heroku domain
+7. Go to the Firebase Console and Authentication -> Sign-in method and add heroku domain
  
 
