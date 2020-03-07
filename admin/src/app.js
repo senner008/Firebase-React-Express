@@ -9,26 +9,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(cors())
 
-const admin = require("./admin.js")
+const checkIfAdmin = require("./middlewares.js")
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.post('/auth', async (req, res) => {
-  var token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.split(' ')[0] === 'Bearer'
-  ) {
-    token =  req.headers.authorization.split(' ')[1];
-  }
-  try {
-    await admin.auth().verifyIdToken(token);
-    res.json({body : "Main content"});
-  }
-  catch (err) {
-    res.status(401);
-    res.send(err);
-  }
+app.post('/auth', checkIfAdmin, async (_, res) => {
+  return res.send({body : "Main content"});
 });
 
 app.get(['/', '*'], function(req, res) {
