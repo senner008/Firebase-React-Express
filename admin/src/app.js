@@ -22,6 +22,8 @@ app.post('/auth', async (req, res) => {
     token =  req.headers.authorization.split(' ')[1];
   }
   try {
+    console.log(token)
+    
     await admin.auth().verifyIdToken(token);
     res.json({body : "Main content"});
   }
