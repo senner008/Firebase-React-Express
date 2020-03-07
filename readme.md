@@ -36,7 +36,7 @@ module.exports = firebaseConfig;
 
 ## Deploy to heroku
 
-1. Create a .env file in admin foler and populate with value from secret firebase json key
+1. Create an .env file in admin folder and populate with values from secret firebase json key
 ```
 PROJECT_ID=secret
 PRIVATE_KEY=secret
