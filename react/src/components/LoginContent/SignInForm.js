@@ -14,6 +14,7 @@ export default function SignInForm ({signIn}) {
     const submitSignin = (e) => {
         e.preventDefault();
         signIn(emailState, passwordState);
+        setPasswordState("");
     }
 
     return (
