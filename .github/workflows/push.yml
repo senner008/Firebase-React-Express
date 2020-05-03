@@ -39,11 +39,11 @@ jobs:
         # Please change the path to your directory for docker build
         docker build . -t sennerregistry.azurecr.io/express-react
         docker push sennerregistry.azurecr.io/express-react
-    - name: 'Run App service deploy'
-      uses: azure/webapps-deploy@v2
+    
+    - uses: azure/webapps-deploy@v2
       with:
-        app-name: react-rexpress-firebase
-        image: sennerregistry.azurecr.io/express-react
+        app-name: 'react-rexpress-firebase'
+        images: 'sennerregistry.azurecr.io/express-react:${{ github.sha }}'
     #- name: 'use the published functionapp url in upcoming steps'
     #  run: |
     #    echo "${{ steps.fa.outputs.app-url }}"
