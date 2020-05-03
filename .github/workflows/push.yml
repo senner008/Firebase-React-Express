@@ -42,7 +42,7 @@ jobs:
     - name: 'Run App service deploy'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'react-rexpress-firebase'
+        app-name: react-rexpress-firebase
         image: sennerregistry.azurecr.io/express-react
     #- name: 'use the published functionapp url in upcoming steps'
     #  run: |
