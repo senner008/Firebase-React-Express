@@ -36,8 +36,8 @@ function App () {
       firebaseInst.init();
       firebaseInst.getAuth().onAuthStateChanged(function(user) {
         setUserFetched(true);
-        getAzureResponse(user);
         if (user) {
+          getAzureResponse(user);
           setUserState(user);
         } else {
           setUserState(null);
