@@ -5,6 +5,8 @@ import About from "./components/About.js"
 import Login from "./components/Login.js"
 import PrivateRoute from "./components/PrivateRoute.js"
 import firebaseInst from "./helpers/firebase.js";
+import ajaxContent from "./helpers/ajax.js"
+import {ajaxUrls} from "./helpers/ajax.js"
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,16 +15,28 @@ import {
 } from "react-router-dom";
 
 const UserContext = createContext(null);
+const AzureFunctionContext = createContext(null);
 
 function App () {
 
    const [userState, setUserState] = useState(null);
    const [userFetched, setUserFetched] = useState(false);
+   const [azureFunctionResponseState, setAzureFunctionResponseState] = useState(false);
+   const [azureResponseMessage, setAzureResponseMessage] = useState(false);
+
+   function getAzureResponse (user) {
+    ajaxContent(ajaxUrls.getName, user.displayName)
+      .then(res => {
+        setAzureFunctionResponseState(true)
+        setAzureResponseMessage(res)
+      });
+   }
 
     useEffect(() => {
       firebaseInst.init();
       firebaseInst.getAuth().onAuthStateChanged(function(user) {
         setUserFetched(true);
+        getAzureResponse(user);
         if (user) {
           setUserState(user);
         } else {
@@ -31,7 +45,7 @@ function App () {
       }); 
     }, []);
 
-  if (!userFetched) {
+  if (!userFetched && !azureFunctionResponseState) {
     console.log("fetching user...")
     return <div>Loading...</div>
   }
@@ -39,6 +53,7 @@ function App () {
   return (
     <Router>
       <UserContext.Provider value={userState}>
+      <AzureFunctionContext.Provider value={azureResponseMessage}>
         <Header>
           <nav>
             <ul>
@@ -51,6 +66,7 @@ function App () {
             </ul>
           </nav>
         </Header>
+      </AzureFunctionContext.Provider>
         <Switch>
           <PrivateRoute path="/main">
             <Main />
@@ -68,6 +84,9 @@ function App () {
 }
 
 export default App;
-export {UserContext};
+export {
+  AzureFunctionContext,
+  UserContext
+};
 
 

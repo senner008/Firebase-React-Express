@@ -1,9 +1,8 @@
 
 import firebaseInst from "./firebase.js";
-
 const errorMsg = "Oops! Something went wrong";
 
-async function _AJAX (url) {
+async function _AJAX (url, body) {
 
     var token;
     try {
@@ -21,7 +20,8 @@ async function _AJAX (url) {
     try {
         var result = await fetch(url, {
             headers: header,
-            method: 'POST'
+            method: 'POST',
+            body: JSON.stringify({ user : body})
         });    
     } catch (err) {
         throw errorMsg;
@@ -36,12 +36,12 @@ async function _AJAX (url) {
 }
 
 
-export default async function ajaxContent (url, setLoader = () => "") {
+export default async function ajaxContent (url, body, setLoader = () => "") {
     
     setLoader(true);
     var result;
     try {
-        result = await _AJAX(url)
+        result = await _AJAX(url, body)
         result = result.body;
     }
     catch (err) {
@@ -52,11 +52,8 @@ export default async function ajaxContent (url, setLoader = () => "") {
 }
 
 const ajaxUrls = {
-    main : "auth"
+    main : "auth",
+    getName : "getName"
 }
 
 export {ajaxUrls}
-
-// export default async function getPrivateContent () {
-//     return ajaxContent("http://localhost:5000/auth")
-// }

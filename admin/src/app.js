@@ -25,8 +25,6 @@ app.post('/getName', checkIfAdmin, async (req, res) => {
     .then(response => res.send({body : response}))
 });
 
-
-
 app.get(['/', '*'], function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
