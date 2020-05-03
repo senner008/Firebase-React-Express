@@ -6,6 +6,7 @@
 # 5. Add this yaml file to your project's .github/workflows/
 # 6. Push your local project to your GitHub Repository
 
+
 name: Linux_Container_Workflow
 
 on:
@@ -52,6 +53,6 @@ jobs:
     - name: Azure logout
       run: |
         az logout
-        
+
     # For more information on GitHub Actions:
     #   https://help.github.com/en/categories/automating-your-workflow-with-github-actions
