@@ -43,7 +43,7 @@ jobs:
       uses: Azure/functions-container-action@v1
       id: fa
       with:
-        app-name: react-rexpress-firebase
+        app-name: 'react-rexpress-firebase'
         image: sennerregistry.azurecr.io/express-react
     #- name: 'use the published functionapp url in upcoming steps'
     #  run: |
