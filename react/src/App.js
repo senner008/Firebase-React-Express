@@ -17,17 +17,23 @@ const UserContext = createContext(null);
 function App () {
 
    const [userState, setUserState] = useState(null);
+   const [userFetched, setUserFetched] = useState(false);
 
     useEffect(() => {
       firebaseInst.init();
       firebaseInst.getAuth().onAuthStateChanged(function(user) {
+        setUserFetched(true);
         if (user) {
           setUserState(user);
         } else {
-          setUserState(null)
+          setUserState(null);
         }
       }); 
     }, []);
+
+  if (!userFetched) {
+    return <div>Loading...</div>
+  }
 
   return (
     <Router>
