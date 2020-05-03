@@ -39,9 +39,8 @@ jobs:
         # Please change the path to your directory for docker build
         docker build . -t sennerregistry.azurecr.io/express-react
         docker push sennerregistry.azurecr.io/express-react
-    - name: 'Run Azure Functions Container Action'
-      uses: Azure/functions-container-action@v1
-      id: fa
+    - name: 'Run App service deploy'
+      uses: azure/webapps-deploy@v2
       with:
         app-name: 'react-rexpress-firebase'
         image: sennerregistry.azurecr.io/express-react
