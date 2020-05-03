@@ -44,6 +44,7 @@ jobs:
       with:
         app-name: 'react-rexpress-firebase'
         images: 'sennerregistry.azurecr.io/express-react:${{ github.sha }}'
+
     #- name: 'use the published functionapp url in upcoming steps'
     #  run: |
     #    echo "${{ steps.fa.outputs.app-url }}"
@@ -51,5 +52,6 @@ jobs:
     - name: Azure logout
       run: |
         az logout
-# For more information on GitHub Actions:
-#   https://help.github.com/en/categories/automating-your-workflow-with-github-actions
+        
+    # For more information on GitHub Actions:
+    #   https://help.github.com/en/categories/automating-your-workflow-with-github-actions
