@@ -32,6 +32,7 @@ function App () {
     }, []);
 
   if (!userFetched) {
+    console.log("fetching user...")
     return <div>Loading...</div>
   }
 
