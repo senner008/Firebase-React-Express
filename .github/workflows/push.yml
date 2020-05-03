@@ -38,8 +38,8 @@ jobs:
       run: |
         # If your function app project is not located in your repository's root
         # Please change the path to your directory for docker build
-        docker build . -t sennerregistry.azurecr.io/express-react
-        docker push sennerregistry.azurecr.io/express-react
+        docker build . -t sennerregistry.azurecr.io/express-react:${{ github.sha }}
+        docker push sennerregistry.azurecr.io/express-react:${{ github.sha }}
     
     - uses: azure/webapps-deploy@v2
       with:
