@@ -1,7 +1,7 @@
 
 import React, {useContext } from 'react';
 import "../css/header.css"
-import {UserContext, AzureFunctionContext} from "../App.js"
+import {UserContext} from "../App.js"
 import firebaseInst from "../helpers/firebase.js";
 import {
     useHistory
@@ -11,7 +11,6 @@ function Header (props) {
 
     let history = useHistory();
     const user = useContext(UserContext);
-    const userMessage = useContext(AzureFunctionContext);
 
     const signOut = () => {
         firebaseInst.signOut();
@@ -25,7 +24,7 @@ function Header (props) {
                 user
                 ? (
                     <>
-                        <p>{userMessage}</p>
+                        <p>Hello, {user.displayName}</p>
                         <button onClick={signOut}>Sign out</button>
                     </>
                 )
