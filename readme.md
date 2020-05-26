@@ -33,6 +33,8 @@ module.exports = firebaseConfig;
   "client_x509_cert_url": ""
 }
 ```
+## Azure Crendentials for gihub action
 
+az ad sp create-for-rbac --name "myApp" --role contributor --scopes /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP} --sdk-auth
  
 

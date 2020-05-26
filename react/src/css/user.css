@@ -1,0 +1,20 @@
+.users {
+    margin: 0;
+    padding: 0;
+}
+
+.user {
+    list-style: none;;
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    margin: 2px 0;
+}
+
+.user div {
+    padding: 5px 10px;;
+}
+
+.user div span {
+    font-weight: bold;;
+}

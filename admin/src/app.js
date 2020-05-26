@@ -1,34 +1,49 @@
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
+const express = require("express");
+const path = require("path");
+const logger = require("morgan");
 const app = express();
-const cors = require('cors');
-const fetch = require('node-fetch');
+const cors = require("cors");
+const fetch = require("node-fetch");
 const port = process.env.PORT || 5000;
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
-const checkIfAdmin = require("./middlewares.js")
+const checkIfAdmin = require("./middlewares.js");
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, "build")));
 
-app.post('/auth', checkIfAdmin, async (_, res) => {
-  return res.send({body : "Main content"});
+app.post("/auth", checkIfAdmin, async (_, res) => {
+  const users = await fetch(
+    "https://somehttptrigger.azurewebsites.net/api/HttpTrigger"
+  ).then((response) => response.json());
+  res.json({ body: users });
 });
 
-app.post('/getName', checkIfAdmin, async (req, res) => {
-  const firstName = req.body.user.split(" ")[0];
-  fetch(`https://azurenodefunc.azurewebsites.net/api/HelloWorldTrigger?name=${firstName}`)
-    .then(response => response.text())
-    .then(response => res.send({body : response}))
+app.post("/create-user", checkIfAdmin, async (req, res) => {
+  try {
+    const response = await fetch(
+      "https://somehttptrigger.azurewebsites.net/api/HttpTriggerInsertUser", {
+        method : 'POST',
+        body : JSON.stringify(
+          {
+            "password" : process.env.PASSWORD,
+            "user_name" : req.body.user.name
+          }
+        )
+      }
+    );
+    const message = await response.text();
+    res.json({ body: message });
+  } catch (err) {
+    res.json({ body: err });
+  }
+  
 });
 
-app.get(['/', '*'], function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get(["/", "*"], function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
-
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -1,29 +1,50 @@
-import React, {useContext, useEffect, useState} from 'react';
-import ajaxContent from "../helpers/ajax.js"
-import {ajaxUrls} from "../helpers/ajax.js"
-import {UserContext} from "../App.js"
-import Loader from "./Loader.js"
+import React, { useContext, useEffect, useState } from "react";
+import ajaxContent from "../helpers/ajax.js";
+import { ajaxUrls } from "../helpers/ajax.js";
+import { UserContext } from "../App.js";
+import Loader from "./Loader.js";
+import User from "./User.js";
 
-export default function Main () {
+import "../css/user.css";
 
-    const user = useContext(UserContext);
-    const [content, setContent] = useState("");
-    const [loadingState, setLoadingState] = useState(false);  
+export default function Main({history}) {
+  const user = useContext(UserContext);
+  const [content, setContent] = useState([]);
+  const [loadingState, setLoadingState] = useState(false);
+
+  var userList;
+  if (content) {
+    const users = content.map((user) => {
+      return (
+        <User
+          key={user.user_id}
+          user_name={user.user_name}
+          user_created_at={user.user_created_at}
+        ></User>
+      );
+    });
+    userList = <ul className="users">{users}</ul>;
+  }
+
+  useEffect(() => {
+    if (user) {
+      (async () => {
+        const users = await ajaxContent(ajaxUrls.main, {}, setLoadingState);
+        setContent(users);
+      })();
+    }
+  }, [user]);
+
+
+
+  return (
+    <>
+    {
+        loadingState 
+            ? <Loader /> 
+            : userList
+    }
     
-    useEffect(() => { 
-        if (user) {
-            ajaxContent(ajaxUrls.main, setLoadingState)
-                .then(setContent);
-        } 
-    }, [user])
-
-    return (
-        <>
-        {
-            loadingState 
-                ? <Loader/>
-                : <h2>{content}</h2>
-        }
-        </>
-    )
+    </>
+    );
 }

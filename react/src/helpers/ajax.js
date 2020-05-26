@@ -53,7 +53,7 @@ export default async function ajaxContent (url, body, setLoader = () => "") {
 
 const ajaxUrls = {
     main : "auth",
-    getName : "getName"
+    createUser : "create-user"
 }
 
 export {ajaxUrls}
