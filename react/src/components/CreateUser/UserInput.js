@@ -1,8 +1,12 @@
 import React, {useState} from "react";
 import HistoryAction from "../historyAction"
+import {
+  withRouter
+} from 'react-router-dom'
 
 
-export default function UserInput({submitTodo, submitResponse, history}) {
+function UserInput({submitTodo, submitResponse, history}) {
+  console.log(history)
     const [name, setName] = useState('');
   
     const onNameChange = e =>
@@ -30,3 +34,4 @@ export default function UserInput({submitTodo, submitResponse, history}) {
       </form>
     )
 }
+export default withRouter(UserInput)

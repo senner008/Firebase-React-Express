@@ -58,7 +58,7 @@ function App () {
           </nav>
         </Header>
         <Switch>
-          <PrivateRoute path="/new">
+          <PrivateRoute path="/new" >
             <UserMaker />
           </PrivateRoute>
           <PrivateRoute path="/main">
