@@ -22,6 +22,7 @@ app.post("/auth", checkIfAdmin, async (_, res) => {
 });
 
 app.post("/create-user", checkIfAdmin, async (req, res) => {
+  console.log(req.body)
   try {
     const response = await fetch(
       "https://somehttptrigger.azurewebsites.net/api/HttpTriggerInsertUser", {
@@ -29,7 +30,8 @@ app.post("/create-user", checkIfAdmin, async (req, res) => {
         body : JSON.stringify(
           {
             "password" : process.env.PASSWORD,
-            "user_name" : req.body.user.name
+            "user_name" : req.body.user.name,
+            "user_time_to_live" : req.body.user.time_to_live
           }
         )
       }

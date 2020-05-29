@@ -20,6 +20,7 @@ export default function Main({history}) {
           key={user.user_id}
           user_name={user.user_name}
           user_created_at={user.user_created_at}
+          user_time_to_live={user.user_time_to_live}
         ></User>
       );
     });

@@ -6,6 +6,7 @@ import Login from "./components/Login.js"
 import PrivateRoute from "./components/PrivateRoute.js"
 import firebaseInst from "./helpers/firebase.js";
 import UserMaker from "./components/CreateUser/UserMaker"
+import MainContainer from "./components/MainContainer"
 import ajaxContent from "./helpers/ajax.js"
 import {ajaxUrls} from "./helpers/ajax.js"
 import {
@@ -57,20 +58,22 @@ function App () {
             </ul>
           </nav>
         </Header>
-        <Switch>
-          <PrivateRoute path="/new" >
-            <UserMaker />
-          </PrivateRoute>
-          <PrivateRoute path="/main">
-            <Main />
-          </PrivateRoute>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-        </Switch>
+        <MainContainer>
+          <Switch>
+            <PrivateRoute path="/new" >
+              <UserMaker />
+            </PrivateRoute>
+            <PrivateRoute path="/main">
+              <Main />
+            </PrivateRoute>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+          </Switch>
+        </MainContainer>
       </UserContext.Provider>
     </Router>
   )

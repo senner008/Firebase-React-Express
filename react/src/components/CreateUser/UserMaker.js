@@ -9,13 +9,13 @@ import {
   
 const UserMaker = ({history}) => {
 
-    async function createUser(name) {
+    async function createUser(name, time_to_live) {
         const body = {
-            name
+            name,
+            time_to_live
         }  
         const response = await ajaxContent(ajaxUrls.createUser, body);
     }
-    console.log(history)
 
   return (
       <UserInput submitTodo={createUser} history={history} submitResponse={HistoryAction(history).goToMain}/>

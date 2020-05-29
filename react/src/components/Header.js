@@ -19,7 +19,7 @@ function Header (props) {
 
     return (
         <div className="header">
-            <h2>Header Component</h2>
+            <h2>Welcome</h2>
             {
                 user
                 ? (
