@@ -19,6 +19,7 @@ export default function BlobsList({history}) {
         <Blob
           name={blob.name}
           created_at={blob.created_at}
+          last_modified={blob.last_modified}
         ></Blob>
       );
     });

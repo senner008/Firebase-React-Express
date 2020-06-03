@@ -23,7 +23,7 @@ app.post("/blobs", checkIfAdmin, async (_, res) => {
   // List the blob(s) in the container.
   const blobsObj = []
   for await (const blob of containerClient.listBlobsFlat()) {
-      blobsObj.push({name : blob.name, created_at : blob.properties.createdOn })
+      blobsObj.push({name : blob.name, created_at : blob.properties.createdOn, last_modified : blob.properties.lastModified })
   }
   res.json({ body: blobsObj });
 });
