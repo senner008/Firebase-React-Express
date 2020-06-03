@@ -6,6 +6,7 @@ import Login from "./components/Login.js"
 import PrivateRoute from "./components/PrivateRoute.js"
 import firebaseInst from "./helpers/firebase.js";
 import UserMaker from "./components/CreateUser/UserMaker"
+import BlobsList from "./components/BlobsList/BlobsList"
 import MainContainer from "./components/MainContainer"
 import ajaxContent from "./helpers/ajax.js"
 import {ajaxUrls} from "./helpers/ajax.js"
@@ -55,11 +56,17 @@ function App () {
               <li>
                 <Link to="/new">Create user</Link>
               </li>
+              <li>
+                <Link to="/blobs">Blobs</Link>
+              </li>
             </ul>
           </nav>
         </Header>
         <MainContainer>
           <Switch>
+          <PrivateRoute path="/blobs" >
+              <BlobsList />
+            </PrivateRoute>
             <PrivateRoute path="/new" >
               <UserMaker />
             </PrivateRoute>

@@ -6,6 +6,9 @@ const cors = require("cors");
 const fetch = require("node-fetch");
 const port = process.env.PORT || 5000;
 
+const { BlobServiceClient } = require('@azure/storage-blob');
+const uuidv1 = require('uuid/v1');
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(cors());
@@ -13,6 +16,17 @@ app.use(cors());
 const checkIfAdmin = require("./middlewares.js");
 
 app.use(express.static(path.join(__dirname, "build")));
+
+app.post("/blobs", checkIfAdmin, async (_, res) => {
+  const blobServiceClient = await BlobServiceClient.fromConnectionString(process.env.STORAGE_KEY);
+  const containerClient = await blobServiceClient.getContainerClient("test");
+  // List the blob(s) in the container.
+  const blobsObj = []
+  for await (const blob of containerClient.listBlobsFlat()) {
+      blobsObj.push({name : blob.name, created_at : blob.properties.createdOn })
+  }
+  res.json({ body: blobsObj });
+});
 
 app.post("/auth", checkIfAdmin, async (_, res) => {
   const users = await fetch(
@@ -22,7 +36,7 @@ app.post("/auth", checkIfAdmin, async (_, res) => {
 });
 
 app.post("/create-user", checkIfAdmin, async (req, res) => {
-  console.log(req.body)
+
   try {
     const response = await fetch(
       "https://somehttptrigger.azurewebsites.net/api/HttpTriggerInsertUser", {
